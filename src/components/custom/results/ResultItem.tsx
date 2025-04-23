@@ -1,36 +1,44 @@
 import { ShopItem } from "@/lib/types";
 import Image from "next/image";
 import { Card, CardHeader, CardContent, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { ResultActionButtons } from "./ResultActionButtons";
 
 export default function ResultItem(item: ShopItem) {
-    const { name, address, station_name, open, close, access, logo_image } = item
+    const { name, address, station_name, open, close, access, logo_image, urls } = item
 
     return (
-        <Card className="overflow-hidden shadow-md hover:shadow-lg transition-shadow mb-1.5">
-              <CardHeader>
-                <CardTitle>{name}</CardTitle>
-                <CardDescription>{address}</CardDescription>
+        <Card className="overflow-hidden shadow-md hover:shadow-lg transition-shadow mb-4 rounded-xl">
+              <CardHeader className="space-y-1">
+              <div className="items-start gap-2">
+                    <div>
+                        <CardTitle className="text-lg font-semibold">{name}</CardTitle>
+                        <CardDescription className="text-xs text-gray-500">{address}</CardDescription>
+                    </div>
+                </div>
                 </CardHeader>
                 <CardContent>
-                    <div className="flex items-center">
+                    <div className="flex items-start gap-4">
                     {logo_image ? <Image 
                                     src={logo_image} 
                                     alt="Company logo" 
-                                    width={32}
-                                    height={32}
-                                    className="w-8 h-8 rounded-full object-cover mr-3"
+                                    width={40}
+                                    height={40}
+                                    className="w-10 h-10 rounded-full object-cover border shadow-sm"
                                 />
-                                : <div className="w-8 h-8 rounded-full bg-[#dbc1c1] overflow-hidden mr-3" />}                
-                    <div>
-                        <p className="text-sm font-medium">最寄り駅： {station_name}</p>
-                        <p className="text-xs font-medium text-balance">{open}</p>
-                        <p className="text-xs font-medium">{close}</p>
-                        <p className="text-xs text-[#757575]"></p>
+                                : <div className="w-10 h-10 rounded-full bg-gray-200" />}                
+                <div className="space-y-1 text-sm text-gray-800">
+                        <p>
+                        <span className="font-medium text-gray-600">最寄り駅：</span>
+                        {station_name}
+                        </p>
+                        <p className="text-xs text-gray-700">open：{open}</p>
+                        <p className="text-xs text-gray-700">close：{close}</p>
+                        <p className="text-xs text-gray-500">{access}</p>
                     </div>
                 </div>
                 </CardContent>
-                <CardFooter>
-                    <p className="text-xs font-medium text-balance">{access}</p>
+                <CardFooter className="border-t">
+                    <ResultActionButtons link={urls.pc} size={"small"} />
                 </CardFooter>
         </Card>
     )
