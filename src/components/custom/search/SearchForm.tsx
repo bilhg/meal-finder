@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Form } from "@/components/ui/form"
 import { SearchFormType, searchSchema } from "@/lib/schema";
-import { ChefHat, Coffee, CookingPot, DollarSign, Fish, Forklift, Globe, KeyRound, Pizza, Search, Sparkles, Utensils, Wine } from "lucide-react";
+import { Beer, ChefHat, Coffee, CookingPot, DollarSign, Fish, Flame, Globe, KeyRound, Pizza, Search, Soup, Sparkles, Utensils, UtensilsCrossed, Wine } from "lucide-react";
 import { ButtonLoading } from "../util/LoadingButton";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -17,15 +17,15 @@ const genreOptions = [
   { text: "ダイニングバー", value: "G002", icon: <Wine /> },
   { text: "創作料理", value: "G003", icon: <Sparkles /> },
   { text: "和食", value: "G004", icon: <Fish /> },
-  { text: "洋食", value: "G005", icon: <Forklift /> },
+  { text: "洋食", value: "G005", icon: <UtensilsCrossed /> },
   { text: "イタリア料理", value: "G006", icon: <Pizza /> },
-  { text: "中華料理", value: "G007", icon: <Utensils /> },
-  { text: "焼肉", value: "G008", icon: <ChefHat /> },
-  { text: "韓国料理", value: "G017", icon: <Utensils /> },
+  { text: "中華料理", value: "G007", icon: <CookingPot /> },
+  { text: "焼肉", value: "G008", icon: <Flame /> },
+  { text: "韓国料理", value: "G017", icon: <Soup /> },
   { text: "アジア系料理", value: "G009", icon: <Globe /> },
-  { text: "バー", value: "G012", icon: <ChefHat /> },
-  { text: "ラーメン", value: "G013", icon: <ChefHat /> },
-  { text: "お好み焼き", value: "G016", icon: <ChefHat /> },
+  { text: "バー", value: "G012", icon: <Beer /> },
+  { text: "ラーメン", value: "G013", icon: <Soup /> },
+  { text: "お好み焼き", value: "G016", icon: <CookingPot /> },
   { text: "カフェ", value: "G014", icon: <Coffee /> },
   { text: "その他", value: "G015", icon: <CookingPot /> },
 ];
@@ -103,17 +103,15 @@ export default function SearchForm() {
               type="text"
               control={form.control}
             />
-              <div className="flex justify-center align-middle gap-2.5">
-                  <div className="w-[150px]">
-                    { isLoading
-                      ? <ButtonLoading />
-                      : <SearchButton 
-                        buttonStyle="bg-slate-800 dark:bg-white text-white dark:text-gray-900 hover:bg-slate-600 dark:hover:bg-gray-100"
-                        buttonText="Search!"
-                        buttonIcon={<Search />}
-                      />
-                    }
-                  </div>
+              <div className="w-full">
+                { isLoading
+                  ? <ButtonLoading />
+                  : <SearchButton 
+                    buttonStyle="bg-slate-800 dark:bg-white text-white dark:text-gray-900 hover:bg-slate-600 dark:hover:bg-gray-100 w-full"
+                    buttonText="Search!"
+                    buttonIcon={<Search />}
+                  />
+                }
               </div>
           </form>
         </Form>

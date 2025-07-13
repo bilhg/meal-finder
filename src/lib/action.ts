@@ -10,7 +10,12 @@ export async function fetchShopData(params: {
   budget?: string | string[] | undefined;
   keyword?: string | string[] | undefined;
 }): Promise<FetchShopDataResult> {
-  const { genre = "", budget = "", keyword = "" } = params;
+  const { genre, budget, keyword } = params
+
+  if (!genre || !budget) {
+    return { data: null, error: "Genre and budget are required search parameters." };
+  }
+
   const apiKey = process.env.HOTPEPPER_API_KEY || "";
 
   if (!apiKey) {

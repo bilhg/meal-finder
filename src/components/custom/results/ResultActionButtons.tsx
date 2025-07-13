@@ -8,13 +8,11 @@ import Link from "next/link"
 
 interface ResultActionButtonsProps {
   link: string,
-  size: "small" | "big"
+  size?: "default" | "sm" | "lg" | "icon"
 }
 
-export function ResultActionButtons({ link, size = "small" }: ResultActionButtonsProps) {
+export function ResultActionButtons({ link, size = "default" }: ResultActionButtonsProps) {
   const [copied, setCopied] = useState(false)
-  const base = size == "small" ? "text-xs gap-1" : "text-sm gap-2"
-  const iconSize = size == "small" ? "w-3 h-3" : "w-4 h-4"
 
   const handleCopy = async () => {
     try {
@@ -30,28 +28,28 @@ export function ResultActionButtons({ link, size = "small" }: ResultActionButton
   }
 
   return (
-
-    <div className="flex flex-start gap-2 my-1">
-        <Button asChild>
-          <Link href={link} target="_blank" >
-            <ExternalLink className={base} size={16}/>
-          店舗ページへ
+    <div className="flex items-center gap-2">
+        <Button asChild size={size}>
+          <Link href={link} target="_blank" className="flex items-center gap-2">
+            <ExternalLink className="w-4 h-4"/>
+            <span>店舗ページへ</span>
           </Link>
       </Button>
       <Button
         onClick={handleCopy}
         variant="outline"
-        className="flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 transition"
+        size={size}
+        className="flex items-center gap-2"
       >
         {copied ? (
           <>
-            <Check className={iconSize + " text-green-500"}/>
-            コピー済み
+            <Check className="w-4 h-4 text-green-500"/>
+            <span>コピー済み</span>
           </>
         ) : (
           <>
-            <ClipboardCopy className={iconSize} />
-            リンクをコピー
+            <ClipboardCopy className="w-4 h-4" />
+            <span>リンクをコピー</span>
           </>
         )}
       </Button>
